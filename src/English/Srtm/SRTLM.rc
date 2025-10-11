@@ -1,0 +1,275 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Japanese (Japan) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\SRTLM.rc2""  // Resources edited with tools other than Microsoft Visual C++\r\n"
+    "#include ""l.jpn\\afxres.rc""          // Standard Components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SRTLM.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "about SRTLM"
+FONT 9, "Arial", 400, 0, 0x0
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,18,17
+    LTEXT           "Lens Meter Simulation by Skew Ray Tracing",IDC_STATIC,37,16,133,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) Kazuo Kawamura - VFF06643@nifty.ne.jp",IDC_STATIC,37,31,161,8
+    DEFPUSHBUTTON   "OK",IDOK,172,13,50,14,WS_GROUP
+END
+
+IDD_SRTLM_DIALOG DIALOGEX 0, 0, 556, 393
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "SRTLM Ver.2.22 by Kazuo Kawamura "
+FONT 9, "Arial", 300, 0, 0x0
+BEGIN
+    CONTROL         "Slider1",IDC_SLIDER_TARGET_DPT,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,243,47,97,14
+    CTEXT           "Target Position",IDC_STATIC,259,17,61,8,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_TARGET_DPT,273,31,30,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_TARGET_DPT,"msctls_updown32",UDS_ARROWKEYS | UDS_HORZ,269,65,40,11
+    PUSHBUTTON      "Default",IDC_BUTTON_TARGET_DEFAULT,274,83,29,12,NOT WS_TABSTOP
+    CONTROL         "Slider1",IDC_SLIDER_PG_ROTATE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_GROUP | WS_TABSTOP,256,136,67,13
+    CTEXT           "Cross Hair",IDC_STATIC,273,105,35,9,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_PG_DEG,265,120,30,12,ES_RIGHT | ES_AUTOHSCROLL | NOT WS_TABSTOP
+    PUSHBUTTON      "180",IDC_BUTTON_PG_ROTATE_0,301,120,15,11,NOT WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_PG_ROTATE,"msctls_updown32",UDS_WRAP | UDS_ARROWKEYS | UDS_HORZ | WS_GROUP,270,152,37,11
+    EDITTEXT        IDC_EDIT_SPH,365,22,36,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "S",IDC_STATIC,353,26,8,8,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_CYL,424,22,36,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "C",IDC_STATIC,410,26,8,10,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_AX2,484,22,36,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "Ax",IDC_STATIC,466,24,9,10,NOT WS_GROUP
+    CONTROL         "Slider1",IDC_SLIDER_LENS_ROTATE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_GROUP | WS_TABSTOP,9,51,65,13
+    CTEXT           "Rotation",IDC_STATIC,22,23,40,8,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_AX,24,37,37,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_LENS_ROTATE,"msctls_updown32",UDS_WRAP | UDS_ARROWKEYS | UDS_HORZ | WS_GROUP,23,66,39,11
+    PUSHBUTTON      "180",IDC_BUTTON_L_ROTATE_0,34,82,17,11,NOT WS_TABSTOP
+    CTEXT           "Position",IDC_STATIC,97,23,47,8,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_LP_Y,80,51,30,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_LP_Y,"msctls_updown32",UDS_ARROWKEYS | WS_GROUP,115,41,9,35
+    PUSHBUTTON      "0.0",IDC_BUTTON_LP_Y_0,134,51,13,11,NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_LP_X,105,86,30,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_LP_X,"msctls_updown32",UDS_HORZ,100,101,40,11
+    PUSHBUTTON      "0.0",IDC_BUTTON_LP_X_0,114,118,13,11,NOT WS_TABSTOP
+    CTEXT           "Tilt",IDC_STATIC,180,23,42,9,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_L_TILT_Y,161,51,30,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_L_TILT_Y,"msctls_updown32",UDS_ARROWKEYS | WS_GROUP,196,41,9,35
+    PUSHBUTTON      "0.0",IDC_BUTTON_L_TILT_Y_0,216,51,13,11,NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_L_TILT_X,186,86,30,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_L_TILT_X,"msctls_updown32",UDS_ARROWKEYS | UDS_HORZ,181,101,40,11
+    PUSHBUTTON      "0.0",IDC_BUTTON_L_TILT_X_0,195,118,13,11,NOT WS_TABSTOP
+    LTEXT           "n",IDC_STATIC,353,43,8,8,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_N,365,41,36,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "t",IDC_STATIC,410,43,8,8,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_T,424,40,36,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "curve",IDC_STATIC,464,42,17,8,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_CURVE,484,39,36,12,ES_RIGHT | ES_AUTOHSCROLL | WS_GROUP
+    RTEXT           "r1",IDC_STATIC_R1,352,65,8,9,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_R1,365,63,60,12,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
+    RTEXT           "r2_min",IDC_STATIC,447,65,23,9,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_R2_MIN,481,62,60,12,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
+    RTEXT           "r2_max",IDC_STATIC,447,83,23,9,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_R2_MAX,481,81,60,12,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
+    PUSHBUTTON      "Data IN",IDC_BUTTON_FILE_IN,450,107,36,13,NOT WS_TABSTOP
+    PUSHBUTTON      "Data OUT",IDC_BUTTON_FILE_OUT,505,107,36,13,NOT WS_TABSTOP
+    PUSHBUTTON      "Rest Current Data",IDC_RESET_CURRENT,348,134,60,14,NOT WS_TABSTOP
+    PUSHBUTTON      "Reset",IDC_BUTTON_RESET,428,134,48,13,NOT WS_TABSTOP
+    PUSHBUTTON      "EXIT",IDCANCEL,499,134,50,14,NOT WS_TABSTOP
+    PUSHBUTTON      "1x",IDC_BUTTON_MAG_1,328,158,13,12,NOT WS_TABSTOP
+    PUSHBUTTON      "2x",IDC_BUTTON_MAG_2,344,158,13,12,NOT WS_TABSTOP
+    PUSHBUTTON      "10x",IDC_BUTTON_MAG_10,360,158,14,12,NOT WS_TABSTOP
+    DEFPUSHBUTTON   "Initialize",ID_START,385,156,55,14,NOT WS_VISIBLE | NOT WS_TABSTOP
+    CONTROL         "Check1",IDC_CHECK_AF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,529,162,9,10
+    LTEXT           "AF",IDC_STATIC,539,162,11,8
+    CONTROL         "Check2",IDC_CHECK_KEISYA,"Button",BS_AUTOCHECKBOX,13,147,9,10
+    LTEXT           "Tilt Linkage",IDC_STATIC,25,148,40,8
+    CONTROL         "Check3",IDC_CHECK_PG,"Button",BS_AUTOCHECKBOX,79,147,9,10
+    LTEXT           "Cross Hairs Following",IDC_STATIC,92,148,69,8
+    CONTROL         "Check1",IDC_CHECK_REVERSE,"Button",BS_AUTOCHECKBOX,167,147,8,10
+    LTEXT           "Reversal",IDC_STATIC,180,148,29,10,NOT WS_GROUP
+    GROUPBOX        "Lens Settings",IDC_STATIC,6,7,229,158,BS_CENTER | WS_GROUP
+    GROUPBOX        "Lens Data",IDC_STATIC,348,7,203,120,BS_CENTER | WS_GROUP
+    CONTROL         "",IDC_PICT,"Static",SS_WHITEFRAME | SS_SUNKEN | WS_BORDER,6,173,315,215,WS_EX_CLIENTEDGE
+    CONTROL         "",IDC_PICT2,"Static",SS_WHITEFRAME | SS_SUNKEN | WS_BORDER,325,173,225,215,WS_EX_CLIENTEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,22,1,1
+ PRODUCTVERSION 2,22,1,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "FileDescription", "SRTLM MFC APPLLICATION"
+            VALUE "FileVersion", "2.22.1.1"
+            VALUE "InternalName", "SRTLM"
+            VALUE "LegalCopyright", "Copyright (C) 2023- Kazuo Kawamura VFF06643@nifty.ne.jp"
+            VALUE "OriginalFilename", "SRTLM.EXE"
+            VALUE "ProductName", "SRTLM APPLLICATION"
+            VALUE "ProductVersion", "2.22.1.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_SRTLM_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 547
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 391
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_SRTLM_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_ABOUTBOX            "about SRTLM(&A)..."
+END
+
+#endif    // 日本語 (日本) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE 17, 1
+#pragma code_page(932)
+#endif //_WIN32
+#include "res\SRTLM.rc2"  // Resources edited with tools other than Microsoft Visual C++
+#include "l.jpn\afxres.rc"          // Standard Components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

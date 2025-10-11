@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0d69db24-bd4f-4b1b-977b-c676358a6342}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\SRTLM_File">
+      <UniqueIdentifier>{d53c1a70-1f81-4559-a374-a98f8d5f8367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dp">
+      <UniqueIdentifier>{c5d39152-7bde-4187-bd27-1a52c191f051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2174ec67-2ba4-453e-86d4-92709101dfbd}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{ee1623ca-2f82-4f70-ba4a-39ab161e78b0}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Source Files\RayTrace">
+      <UniqueIdentifier>{b02fbf89-68c1-4be3-9cec-db4a516aea14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DrawFunc">
+      <UniqueIdentifier>{548933a6-e1bc-4b99-8026-c43e4ef7df41}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SRTLM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLM_DataIn.cpp">
+      <Filter>Source Files\SRTLM_File</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLM_DataOut.cpp">
+      <Filter>Source Files\SRTLM_File</Filter>
+    </ClCompile>
+    <ClCompile Include="DpNumDispCtrl.cpp">
+      <Filter>Source Files\Dp</Filter>
+    </ClCompile>
+    <ClCompile Include="DpNumDispCtrlDeg.cpp">
+      <Filter>Source Files\Dp</Filter>
+    </ClCompile>
+    <ClCompile Include="DpNumDispCtrlIndex.cpp">
+      <Filter>Source Files\Dp</Filter>
+    </ClCompile>
+    <ClCompile Include="DpNumDispCtrlPos.cpp">
+      <Filter>Source Files\Dp</Filter>
+    </ClCompile>
+    <ClCompile Include="DpNumDispCtrlThickness.cpp">
+      <Filter>Source Files\Dp</Filter>
+    </ClCompile>
+    <ClCompile Include="DpNumCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalDef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RayTrace.cpp">
+      <Filter>Source Files\RayTrace</Filter>
+    </ClCompile>
+    <ClCompile Include="RayTraceDraw.cpp">
+      <Filter>Source Files\RayTrace</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawFunc2.cpp">
+      <Filter>Source Files\DrawFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawFunc.cpp">
+      <Filter>Source Files\DrawFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLMDlgEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLMDlgEditCtrlColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLMDlgSub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLMDlgScroll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLMDlgAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTLMDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkewRayTrace.cpp">
+      <Filter>Source Files\RayTrace</Filter>
+    </ClCompile>
+    <ClCompile Include="SkewRayTraceSub.cpp">
+      <Filter>Source Files\RayTrace</Filter>
+    </ClCompile>
+    <ClCompile Include="DpNumDispCurve.cpp">
+      <Filter>Source Files\Dp</Filter>
+    </ClCompile>
+    <ClCompile Include="Ransu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SRTLM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SRTLMDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DpNumCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RayTrace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawFunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ransu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\SRTLM.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\SRTLM.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SRTLM.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

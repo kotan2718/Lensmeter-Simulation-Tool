@@ -1,0 +1,336 @@
+﻿
+//* Copyright (c) 2025 Kazuo Kawamura
+//*
+//* This source code is distributed under the MIT License.
+//*
+//* Please see the LICENSE file for details.
+
+
+// SRTLM.cpp : Define classes for applications.
+//
+
+#include "stdafx.h"
+#include "SRTLM.h"
+#include "SRTLMDlg.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+{
+    // TODO: Add code for the message handler at this location or call the default handler.
+
+    switch(pScrollBar->GetDlgCtrlID())
+    {
+        case IDC_SPIN_LP_X:    //* Process scroll messages from IDC_SPIN_LP_X only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            switch(m_bJujiRendou)
+            {
+                case true:
+                {
+                    double dRad_PG_Memori = m_dPintGlassMemori * KK_PI / 180.0;
+                    m_dTLX[5] = m_dTLX[5] + double(iPosition - m_iLensPosXOld) / 10.0 * cos(dRad_PG_Memori);
+                    m_dTLX[6] = m_dTLX[5];
+                    m_dTLY[5] = m_dTLY[5] - double(iPosition - m_iLensPosXOld) / 10.0 * sin(dRad_PG_Memori);
+                    m_dTLY[6] = m_dTLY[5];
+                    if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+                    break;
+                }
+                case false:
+                {
+                    m_dTLX[5] = m_dTLX[5] + double(iPosition - m_iLensPosXOld) / 10.0 ;
+                    m_dTLX[6] = m_dTLX[5];
+                    if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+                    break;
+                }
+            }
+            m_bSyokika = false;
+            m_iLensPosXOld = iPosition;
+            //*    MainProgram();
+            Invalidate(FALSE);
+            break;
+        }
+        case IDC_SPIN_TARGET_DPT:    //* Process scroll messages from IDC_SPIN_TARGET_DPT only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            m_dDpt = double(iPosition) / 100.0;
+
+            Target(m_dDpt, &m_dObjZ);
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+
+            CSliderCtrl* pSlider_target_dpt = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_TARGET_DPT);
+            pSlider_target_dpt->SetPos(iPosition / 25);
+            break;
+        }
+        case IDC_SPIN_PG_ROTATE:    //* Process scroll messages from IDC_SPIN_PG_ROTATE only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            m_dPintGlassBar = double(iPosition);
+            Ax_Henkan(4, m_dPintGlassBar);
+
+            if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+
+            CSliderCtrl* pSlider_PG_rotate = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_PG_ROTATE);
+            pSlider_PG_rotate->SetPos(iPosition);
+            break;
+        }
+        case IDC_SPIN_LENS_ROTATE:    //* Process scroll messages from IDC_SPIN_LENS_ROTATE only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            m_dCylTheta[5] = double(-iPosition);
+            m_dAx_Hyouji = -m_dCylTheta[5];
+            Ax_Henkan(1, m_dAx_Hyouji);
+            Ax_Henkan(2, m_dCylTheta[5]);
+            m_dCylTheta[6] = m_dCylTheta[5];
+
+            if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+
+            CSliderCtrl* pSlider_lens_rotate = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_LENS_ROTATE);
+            pSlider_lens_rotate->SetPos(iPosition);
+            break;
+        }
+        case IDC_SPIN_L_TILT_X:    //* Process scroll messages from IDC_SPIN_L_TILT_X only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            m_dHenFai[5] = double(iPosition) / 10.0;
+            m_dHenFai[6] = m_dHenFai[5];
+
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+            break;
+        }
+        case IDC_SLIDER_TARGET_DPT:    //* Process slider messages from IDC_SLIDER_TARGET_DPT only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+            return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+//*            TRACE("mpos = %d\n", nPos);
+
+            switch(nSBCode)
+            {
+                case 0:    //* SB_LINELEFT, SB_LINEUP(Arrow keys: Left, Up)
+                case 2:    //* SB_PAGELEFT, SB_PAGEDOWN(The area to the left of the slider knob)
+                {
+                    iPosition = int(m_dDpt * 4.0) - 1;
+                    CSliderCtrl* pSlider_target_dpt = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_TARGET_DPT);
+                    pSlider_target_dpt->SetPos(iPosition);
+                    break;
+                }
+                case 1:    //* SB_LINERIGHT, SB_LINEDOWN(Arrow keys: Right, Down)
+                case 3:    //* SB_PAGERIGHT, SB_PAGEUP(The area to the right of the slider knob)
+                {
+                    iPosition = int(m_dDpt * 4.0) + 1;
+                    CSliderCtrl* pSlider_target_dpt = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_TARGET_DPT);
+                    pSlider_target_dpt->SetPos(iPosition);
+                    break;
+                }
+            }
+            m_dDpt = double(iPosition) / 4.0;
+
+            Target(m_dDpt, &m_dObjZ);
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+
+            CSpinButtonCtrl* pSpin_target_dpt = (CSpinButtonCtrl*) GetDlgItem(IDC_SPIN_TARGET_DPT);
+            pSpin_target_dpt->SetPos(iPosition * 25);
+            break;
+        }
+        case IDC_SLIDER_PG_ROTATE:    //* Process slider messages from IDC_SLIDER_PG_ROTATE only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            switch(nSBCode)
+            {
+                case 0:    //* SB_LINELEFT, SB_LINEUP(Arrow keys: Left, Up)
+                case 2:    //* SB_PAGELEFT, SB_PAGEDOWN(The area to the left of the slider knob)
+                {
+                    iPosition = int(m_dPintGlassBar) - 5;
+                    CSliderCtrl* pSlider_PG_rotate = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_PG_ROTATE);
+                    pSlider_PG_rotate->SetPos(iPosition);
+                    break;
+                }
+                case 1:    //* SB_LINERIGHT, SB_LINEDOWN(Arrow keys: Right, Down)
+                case 3:    //* SB_PAGERIGHT, SB_PAGEUP(The area to the right of the slider knob)
+                {
+                    iPosition = int(m_dPintGlassBar) + 5;
+                    CSliderCtrl* pSlider_PG_rotate = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_PG_ROTATE);
+                    pSlider_PG_rotate->SetPos(iPosition);
+                    break;
+                }
+            }
+
+            m_dPintGlassBar = double(iPosition);
+            Ax_Henkan(4, m_dPintGlassBar);
+
+            if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+
+            CSpinButtonCtrl* pSpin_PG_rotate = (CSpinButtonCtrl*) GetDlgItem(IDC_SPIN_PG_ROTATE);
+            pSpin_PG_rotate->SetPos(iPosition);
+            break;
+        }
+        case IDC_SLIDER_LENS_ROTATE:    //* Process slider messages from IDC_SLIDER_LENS_ROTATE only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            switch(nSBCode)
+            {
+                case 0:    //* SB_LINELEFT, SB_LINEUP(Arrow keys: Left, Up)
+                case 2:    //* SB_PAGELEFT, SB_PAGEDOWN(The area to the left of the slider knob)
+            {
+                iPosition = int(-m_dCylTheta[5]) - 5;
+                CSliderCtrl* pSlider_lens_rotate = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_LENS_ROTATE);
+                pSlider_lens_rotate->SetPos(iPosition);
+                break;
+            }
+                case 1:    //* SB_LINERIGHT, SB_LINEDOWN(Arrow keys: Right, Down)
+                case 3:    //* SB_PAGERIGHT, SB_PAGEUP(The area to the right of the slider knob)
+            {
+                iPosition = int(-m_dCylTheta[5]) + 5;
+                CSliderCtrl* pSlider_lens_rotate = (CSliderCtrl*) GetDlgItem(IDC_SLIDER_LENS_ROTATE);
+                pSlider_lens_rotate->SetPos(iPosition);
+                break;
+            }
+            }
+            m_dCylTheta[5] = double(-iPosition);
+            m_dAx_Hyouji = -m_dCylTheta[5];
+            Ax_Henkan(1, m_dAx_Hyouji);
+            Ax_Henkan(2, m_dCylTheta[5]);
+            m_dCylTheta[6] = m_dCylTheta[5];
+
+            if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+
+            CSpinButtonCtrl* pSpin_lens_rotate = (CSpinButtonCtrl*) GetDlgItem(IDC_SPIN_LENS_ROTATE);
+            pSpin_lens_rotate->SetPos(iPosition);
+            break;
+        }
+    }
+        CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
+}
+
+void CSRTLMDlg::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+{
+    //* TODO: Add code for the message handler at this location or call the default handler.
+
+    switch(pScrollBar->GetDlgCtrlID())
+    {
+        case IDC_SPIN_LP_Y:    //* Process scroll messages from IDC_SPIN_LP_Y only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            switch(m_bJujiRendou)
+            {
+            case true:
+            {
+                double dRad_PG_Memori = m_dPintGlassMemori * KK_PI / 180.0;
+                m_dTLX[5] = m_dTLX[5] - double(iPosition - m_iLensPosYOld) / 10.0 * cos(dRad_PG_Memori + KK_PI / 2.0);
+                m_dTLX[6] = m_dTLX[5];
+                m_dTLY[5] = m_dTLY[5] + double(iPosition - m_iLensPosYOld) / 10.0 * sin(dRad_PG_Memori + KK_PI / 2.0);
+                m_dTLY[6] = m_dTLY[5];
+                if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+                break;
+            }
+            case false:
+            {
+                m_dTLY[5] = m_dTLY[5] + double(iPosition - m_iLensPosYOld) / 10.0;
+                m_dTLY[6] = m_dTLY[5];
+                if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
+                break;
+            }
+            }
+            m_bSyokika = false;
+            m_iLensPosYOld = iPosition;
+            //*    MainProgram();
+            Invalidate(FALSE);
+            break;
+        }
+        case IDC_SPIN_L_TILT_Y:    //* Process scroll messages from IDC_SPIN_L_TILT_Y only
+        {
+            if (nSBCode == SB_ENDSCROLL) {
+                return; //* Reject spurious messages
+            }
+
+            int iPosition;
+            iPosition = nPos;
+
+            m_dHenTheta[5] = double(iPosition) / 10.0;
+            m_dHenTheta[6] = m_dHenTheta[5];
+
+            m_bSyokika = false;
+            //*    MainProgram();
+            Invalidate(FALSE);
+            break;
+        }
+    }
+    CDialog::OnVScroll(nSBCode, nPos, pScrollBar);
+}
+
+
+
