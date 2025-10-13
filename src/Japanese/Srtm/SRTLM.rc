@@ -77,15 +77,15 @@ CAPTION "about SRTLM"
 FONT 9, "Times New Roman", 400, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,18,17
-    LTEXT           "Lens Meter Simulation by Skew Ray Tracing",IDC_STATIC,37,16,133,8,SS_NOPREFIX
-    LTEXT           "Copyright (C) Kazuo Kawamura - VFF06643@nifty.ne.jp",IDC_STATIC,37,31,161,8
+    LTEXT           "SRTLM - Lens Meter Simulation",IDC_STATIC,37,16,133,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) Kazuo Kawamura 2025",IDC_STATIC,37,31,161,8
     DEFPUSHBUTTON   "OK",IDOK,172,13,50,14,WS_GROUP
 END
 
 IDD_SRTLM_DIALOG DIALOGEX 0, 0, 556, 455
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "SRTLM Ver.2.22 by Kazuo Kawamura "
+CAPTION "SRTLM Ver.2.22 by Kazuo Kawamura"
 FONT 9, "‚l‚r ‚oƒSƒVƒbƒN", 0, 0, 0x1
 BEGIN
     CONTROL         "Slider1",IDC_SLIDER_TARGET_DPT,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,243,50,97,18
@@ -184,7 +184,7 @@ BEGIN
             VALUE "FileDescription", "SRTLM MFC ±ÌßØ¹°¼®Ý"
             VALUE "FileVersion", "2.22.1.1"
             VALUE "InternalName", "SRTLM"
-            VALUE "LegalCopyright", "Copyright (C) 2023 Kazuo Kawamura VFF06643@nifty.ne.jp"
+            VALUE "LegalCopyright", "Copyright (C) 2025 Kazuo Kawamura"
             VALUE "OriginalFilename", "SRTLM.EXE"
             VALUE "ProductName", "SRTLM ±ÌßØ¹°¼®Ý"
             VALUE "ProductVersion", "2.22.1.1"

@@ -31,6 +31,12 @@ This tool is developed as a dialog-based application using **Visual Studio C++ (
 
 ---
 
+## Executable files and documentation: Available from the following location
+
+[https://kz-page.la.coocan.jp/etc_SRTLM_En.html](https://kz-page.la.coocan.jp/etc_SRTLM_En.html)
+
+---
+
 ## License
 This project is licensed under the **MIT License**.
 See [LICENSE](LICENSE) for details.
@@ -47,7 +53,8 @@ See [LICENSE](LICENSE) for details.
 
 ## Author
 Kazuo Kawamura
-[https://kotan2718.github.io/](https://kotan2718.github.io/)
+[Contrail (GitHub Pages)](https://kotan2718.github.io/Contrail/)
+[Lensmeter Simulation Tool (GitHub Pages)](https://kotan2718.github.io/Lensmeter-Simulation-Tool/)
 
 ---
 

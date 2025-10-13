@@ -31,6 +31,12 @@
 
 ---
 
+## 実行ファイル及びドキュメントの入手先
+
+[https://kz-page.la.coocan.jp/etc_SRTLM.html](https://kz-page.la.coocan.jp/etc_SRTLM.html)
+
+---
+
 ## ライセンス
 このプロジェクトは、**MIT ライセンス** に基づいてライセンスされます。
 詳細は[ライセンス](ライセンス)をご覧ください。
@@ -47,7 +53,8 @@
 
 ## 作者
 川村 一夫
-[https://kotan2718.github.io/](https://kotan2718.github.io/)
+[Contrail (GitHub Pages)](https://kotan2718.github.io/Contrail/)
+[Lensmeter Simulation Tool (GitHub Pages)](https://kotan2718.github.io/Lensmeter-Simulation-Tool/)
 
 ---
 

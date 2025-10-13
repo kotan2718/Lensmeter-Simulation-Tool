@@ -19,7 +19,7 @@
 #define STR_VERSION        "2.22.1.1"
 
 //* 年が変わったら、年号を変更する
-#define STR_COPYRIGHT    "Copyright (C) 2023 Kazuo Kawamura VFF06643@nifty.ne.jp"
+#define STR_COPYRIGHT    "Copyright (C) 2025 Kazuo Kawamura"
 
 class CVersion
 {
