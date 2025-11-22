@@ -46,10 +46,14 @@ LPTSTR str_cvt(double sn, int cut);
 
 #define KK_PI    3.14159265358979 //* 3238462643383279
 
+//* Rounding up of a number
+#define KK_CEIL  0.000000000000001 //* 20251112 (Ver.2.27.0) Fixed a bug where numerical data such as 1.54999... was not rounded at the specified decimal places.
+
 //* Number of Coronas
 #define CORONA_NUM        36
 //* Number of rays required to draw one corona image
 #define CORONA_RAY_CNT    11
+#define CORONA_RAY_CNT2   37 //* 20251025 (Ver.2.23.0)
 
 //* Lens constructions: Maximum total number of Boundary Surfaces
 #define KOUSEIMEN_MAX    15

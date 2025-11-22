@@ -27,6 +27,9 @@ void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
     {
         case IDC_SPIN_LP_X:    //* Process scroll messages from IDC_SPIN_LP_X only
         {
+            //* 20251116 (Ver.2.27.0) When the spin buttons are pressed, if the lens group edit boxes have focus, kill their focus.
+            SetFocus();
+
             if (nSBCode == SB_ENDSCROLL) {
                 return; //* Reject spurious messages
             }
@@ -62,6 +65,9 @@ void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
         }
         case IDC_SPIN_TARGET_DPT:    //* Process scroll messages from IDC_SPIN_TARGET_DPT only
         {
+            //* 20251116 (Ver.2.27.0) When the spin buttons are pressed, if the lens group edit boxes have focus, kill their focus.
+            SetFocus();
+
             if (nSBCode == SB_ENDSCROLL) {
                 return; //* Reject spurious messages
             }
@@ -82,6 +88,9 @@ void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
         }
         case IDC_SPIN_PG_ROTATE:    //* Process scroll messages from IDC_SPIN_PG_ROTATE only
         {
+            //* 20251116 (Ver.2.27.0) When the spin buttons are pressed, if the lens group edit boxes have focus, kill their focus.
+            SetFocus();
+
             if (nSBCode == SB_ENDSCROLL) {
                 return; //* Reject spurious messages
             }
@@ -103,6 +112,9 @@ void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
         }
         case IDC_SPIN_LENS_ROTATE:    //* Process scroll messages from IDC_SPIN_LENS_ROTATE only
         {
+            //* 20251116 (Ver.2.27.0) When the spin buttons are pressed, if the lens group edit boxes have focus, kill their focus.
+            SetFocus();
+
             if (nSBCode == SB_ENDSCROLL) {
                 return; //* Reject spurious messages
             }
@@ -116,6 +128,9 @@ void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
             Ax_Henkan(2, m_dCylTheta[5]);
             m_dCylTheta[6] = m_dCylTheta[5];
 
+            //m_dAx2 = -m_dCylTheta[5];   //* 20251029 (Ver.2.26.0) Linked to [Lens Data] <- リンクさせない仕様に決定
+            //Ax_Henkan(6, m_dAx2);       //* 20251029 (Ver.2.26.0) Linked to [Lens Data] <- リンクさせない仕様に決定
+
             if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
             m_bSyokika = false;
             //*    MainProgram();
@@ -127,6 +142,9 @@ void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
         }
         case IDC_SPIN_L_TILT_X:    //* Process scroll messages from IDC_SPIN_L_TILT_X only
         {
+            //* 20251116 (Ver.2.27.0) When the spin buttons are pressed, if the lens group edit boxes have focus, kill their focus.
+            SetFocus();
+
             if (nSBCode == SB_ENDSCROLL) {
                 return; //* Reject spurious messages
             }
@@ -257,6 +275,9 @@ void CSRTLMDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
             Ax_Henkan(2, m_dCylTheta[5]);
             m_dCylTheta[6] = m_dCylTheta[5];
 
+            //m_dAx2 = -m_dCylTheta[5];   //* 20251029 (Ver.2.26.0) Linked to [Lens Data] <- リンクさせない仕様に決定
+            //Ax_Henkan(6, m_dAx2);       //* 20251029 (Ver.2.26.0) Linked to [Lens Data] <- リンクさせない仕様に決定
+
             if(m_bKeisyaRendou)    SRTLM_Keisya_Rendou();
             m_bSyokika = false;
             //*    MainProgram();
@@ -278,6 +299,9 @@ void CSRTLMDlg::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
     {
         case IDC_SPIN_LP_Y:    //* Process scroll messages from IDC_SPIN_LP_Y only
         {
+            //* 20251116 (Ver.2.27.0) When the spin buttons are pressed, if the lens group edit boxes have focus, kill their focus.
+            SetFocus();
+
             if (nSBCode == SB_ENDSCROLL) {
                 return; //* Reject spurious messages
             }
@@ -313,6 +337,9 @@ void CSRTLMDlg::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
         }
         case IDC_SPIN_L_TILT_Y:    //* Process scroll messages from IDC_SPIN_L_TILT_Y only
         {
+            //* 20251116 (Ver.2.27.0) When the spin buttons are pressed, if the lens group edit boxes have focus, kill their focus.
+            SetFocus();
+
             if (nSBCode == SB_ENDSCROLL) {
                 return; //* Reject spurious messages
             }

@@ -146,8 +146,14 @@ int CRayTrace::RayTraceMain(double dVSC_h, int nStepIR)
 
     for (int nIKK = 0; nIKK < 36; nIKK++) {
         for (int nJKK = 0; nJKK < m_iIR + 1; nJKK++) {
-            dDeltaX = double(nJKK) * cos(KK_PI / 18.0 * double(nIKK)) / 4.0; //* 2.0
-            dDeltaY = double(nJKK) * sin(KK_PI / 18.0 * double(nIKK)) / 4.0; //* 2.0
+            if (m_iCoronaFlg == 0) {
+                dDeltaX = double(nJKK) * cos(KK_PI / 18.0 * double(nIKK)) / 4.0; //* 2.0
+                dDeltaY = double(nJKK) * sin(KK_PI / 18.0 * double(nIKK)) / 4.0; //* 2.0
+            }
+            else {
+                dDeltaX = double(nJKK) * 0.2777777777777778 * cos(KK_PI / 18.0 * double(nIKK)) / 4.0; //* 2.0
+                dDeltaY = double(nJKK) * 0.2777777777777778 * sin(KK_PI / 18.0 * double(nIKK)) / 4.0; //* 2.0
+            }
             m_dAX = dVSC_h * dDeltaX / double(nStepIR);
             m_dAY = dVSC_h * dDeltaY / double(nStepIR);
             m_dAZ = m_dQNTP;

@@ -8,15 +8,14 @@
 
 #pragma once
 
-//* major version  0: no double buffering
-//*                1: double buffering without class
+//* major version  0: Constructing in Visual Basic
+//*                1: Ported from Visual Basic
 //*                2: double buffering with class
 //* minor version  懸念事項の対応
-//* build version  きりがないので1で固定
-//* revision       これもきりがないなぁ...
+//* patch version  きりがないので0で固定
 
-#define VERSION             2,22,1,1
-#define STR_VERSION        "2.22.1.1"
+#define VERSION             2,27,0
+#define STR_VERSION        "2.27.0"
 
 //* 年が変わったら、年号を変更する
 #define STR_COPYRIGHT    "Copyright (C) 2025 Kazuo Kawamura"

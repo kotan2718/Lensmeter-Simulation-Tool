@@ -38,16 +38,16 @@ BOOL CDpNumCtrl::DpSetData2(double dValue, int type)
         }
     double dDmy = m_dNumValue;
     //* 1.523
-    // 1
+    //* 1
     m_iIntFirst = int(floor(dDmy));
 
     //* 15.23 - 10.00 => 5.23
     dDmy = (dDmy - double(m_iIntFirst)) * 10.0;
-    // 5
+    //* 5
     m_iFracFirst = int(floor(dDmy));
     //* 52.3 - 50.0 => 2.3
     dDmy = (dDmy - double(m_iFracFirst)) * 10.0;
-    // 2
+    //* 2
     m_iFracSecond = int(floor(dDmy));
     //* 23.0 - 20.0 => 3.0
     dDmy = (dDmy - double(m_iFracSecond)) * 10.0;

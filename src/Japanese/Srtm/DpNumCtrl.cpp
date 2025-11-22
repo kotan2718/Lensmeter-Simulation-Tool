@@ -54,7 +54,6 @@ BEGIN_MESSAGE_MAP(CDpNumCtrl, CEdit)
     ON_WM_NCPAINT()
     ON_WM_RBUTTONUP()
     //}}AFX_MSG_MAP
-//    ON_COMMAND(IDC_EDIT_AX2, &CDpNumCtrl::OnEditAx2)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

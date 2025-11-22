@@ -40,7 +40,7 @@ BOOL CSRTLMDlg::Ax_Henkan(int iNum, double dAx)
         m_dCylTheta[6] = dAx;
         break;
 
-        //* Pint glass scale rotation
+        //* focusing scale rotation
     case 3:
         if(dAx > 90.0)    dAx = dAx - 180;
 
@@ -141,9 +141,18 @@ long CSRTLMDlg::CoronaColor()
 
     dColorPosition = 0.5 * SQUARE(dObjZtmp - dKai1)  * SQUARE(dObjZtmp - dKai2);
 
-    if(dColorPosition > 127.0)    dColorPosition = 100.0; //* 27.0;
+    //* 20251025 (Ver.2.23.0) Start ///////////////////////
+    ////if(dColorPosition > 127.0)    dColorPosition = 100.0; //* 27.0;
+    if (dColorPosition > 78.0)    dColorPosition = 100.0; //* 27.0;
 
-    return RGB(128 + int(dColorPosition * 1.0), 255, 128 + int(dColorPosition * 1.0));
+    ////return RGB(128 + int(dColorPosition * 1.0), 255, 128 + int(dColorPosition * 1.0));
+    if (dColorPosition >= 100.0 ) {
+        return RGB(200, 234, 200);
+    }
+    else {
+        return RGB(112 + int(dColorPosition * 1.0), 224 + int(dColorPosition * 0.1), 112 + int(dColorPosition * 1.0));
+    }
+    //* 20251025 (Ver.2.23.0)   End ///////////////////////
 }
 
 
@@ -309,11 +318,21 @@ BOOL CSRTLMDlg::R_KINJIKU_Debug2()
 
 BOOL CSRTLMDlg::Make_Lens()
 {
-    double d_f1d, d_f2d, d_f2d2, d_D2d, d_D2d2;
-
+    double d_f1d, d_f1d_crown, d_f2d, d_f2d2, d_D2d, d_D2d2;
+    double dIndexReference;
+    dIndexReference = 1.523;
     if(m_dD1d != 0.0) {
-        d_f1d = 1000.0 * m_dRefractiveIndex / m_dD1d;
-        m_dRadius1 = d_f1d * (m_dRefractiveIndex - 1.0) / m_dRefractiveIndex;
+        //* 20251027 (Ver.2.24.0) m_bFccf1523Flg
+        //* Front Curve : Whether to fix to the refractive index of crown glass
+        if (m_bFccf1523Flg != true) {
+            d_f1d = 1000.0 * m_dRefractiveIndex / m_dD1d;
+            m_dRadius1 = d_f1d * (m_dRefractiveIndex - 1.0) / m_dRefractiveIndex;
+        }
+        else {
+            d_f1d_crown = 1000.0 * dIndexReference / m_dD1d;
+            d_f1d = m_dRadius1 / (m_dRefractiveIndex - 1.0) * m_dRefractiveIndex;
+            m_dRadius1 = d_f1d_crown * (dIndexReference - 1.0) / dIndexReference;
+        }
     }
     else {
         d_f1d = -1.79769313486232E+307;
@@ -375,6 +394,7 @@ BOOL CSRTLMDlg::Make_Lens()
         m_dCylTheta[5] = 0.0;
         m_dCylTheta[6] = m_dCylTheta[5];
     }
+
 
     R_KINJIKU();
 

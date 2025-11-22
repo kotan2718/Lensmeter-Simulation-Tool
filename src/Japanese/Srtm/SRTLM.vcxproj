@@ -183,12 +183,6 @@
     <Image Include="res\SRTLM.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\SRTLM.rc2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="SRTLM.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

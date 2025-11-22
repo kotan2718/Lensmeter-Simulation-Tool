@@ -123,7 +123,8 @@ CSRTLMDlg::CSRTLMDlg(CWnd* pParent /*=NULL*/)
     m_bKeisyaRendou = false;
     m_bJujiRendou = false;
     m_bHantenFlg = false;
-    m_bAFFlg = true;
+    m_bAFFlg = true;        
+    m_bFccf1523Flg = false; //* 20251027 (Ver.2.24.0)
 
     m_dDefaultObjZ = -9999.0;
     m_dNowDefaultObjZ = -9999.0;
@@ -181,6 +182,7 @@ CSRTLMDlg::CSRTLMDlg(CWnd* pParent /*=NULL*/)
     g_dWindowPosTop2 = g_dWindowPosTop2 * m_dWin2Mag;
     g_dWindowPosBottom2 = g_dWindowPosBottom2 * m_dWin2Mag;
     /////////////////////////////////////////////////////
+
     //* 前半部分終了
 }
 
@@ -209,6 +211,7 @@ void CSRTLMDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_CHECK_AF, m_Check_AF);
     DDX_Control(pDX, IDC_CHECK_KEISYA, m_Check_Keisya);
     DDX_Control(pDX, IDC_EDIT_AX2, m_DpStrAx2);         //* 20230610 Add  Lens Data : Ax
+    DDX_Control(pDX, IDC_CHECK_FCCF, m_Check_Fccf1523); //* 20251027 (Ver.2.24.0)7 Add  Front Curve : Whether to fix to the refractive index of crown glass
 }
 
 BEGIN_MESSAGE_MAP(CSRTLMDlg, CDialog)
@@ -262,6 +265,7 @@ BEGIN_MESSAGE_MAP(CSRTLMDlg, CDialog)
     ON_EN_CHANGE(IDC_EDIT_AX2, &CSRTLMDlg::OnChangeEditAx2)         //* 20230610 Add  Lens Data : Ax
     ON_EN_KILLFOCUS(IDC_EDIT_AX2, &CSRTLMDlg::OnKillfocusEditAx2)   //* 20230610 Add  Lens Data : Ax
     ON_EN_SETFOCUS(IDC_EDIT_AX2, &CSRTLMDlg::OnSetfocusEditAx2)     //* 20230610 Add  Lens Data : Ax
+    ON_BN_CLICKED(IDC_CHECK_FCCF, OnCheckFCCF)                      //* 20251027 Add (Ver.2.24.0)
     //}}AFX_MSG_MAP
     ON_WM_DESTROY()
     END_MESSAGE_MAP()
@@ -436,6 +440,7 @@ BOOL CSRTLMDlg::OnInitDialog()
 
     m_Check_Keisya.SetCheck(1);
     m_Check_AF.SetCheck(1);
+    m_Check_Fccf1523.SetCheck(0);   //* 20251027 Add (Ver.2.24.0)
 
     /////////////////////////////////////////////////////
     //* 後半部分終了
@@ -491,7 +496,7 @@ void CSRTLMDlg::OnPaint()
 
         MainProgram();
 
-        //* 貼り付け
+        //* Paste
         m_pDC1->BitBlt(0, 0, g_lPictureBoxSizeX, g_lPictureBoxSizeY, &g_memDC1, 0, 0, SRCCOPY);
 
         //* 貼り付け
@@ -556,6 +561,7 @@ BOOL CSRTLMDlg::MainProgram()
     CRect rc2;
     g_pict2.GetClientRect(rc2);
     g_memDC2.FillSolidRect(rc2, RGB(255, 255, 255));
+////    g_memDC2.FillSolidRect(rc2, RGB(0, 0, 0));
 
     //* ピクチャーボックスの倍率設定
     if(m_bPicBoxSizeFlg) {
@@ -582,14 +588,19 @@ BOOL CSRTLMDlg::MainProgram()
     //
     //////////////////////////
 
-    //* コロナの描画...x1,x2 と x10 間の見直し必要
+    //* 20251025 (Ver.2.23.0) x10 : Increase the number of rays to trace
+    //* コロナの描画...x1, x2, x10
     int nStepIR;
-    if (m_iCoronaFlg == 0) {
-        m_iIR = 5;
+    if (m_iCoronaFlg == 0) {                //* x1, x2
+        ////m_iIR = 5;
+        ////nStepIR = 1;
+        m_iIR = (CORONA_RAY_CNT - 1) / 2;
         nStepIR = 1;
     }
-    else {
-        m_iIR = 10;
+    else {                                  //* x10
+        ////m_iIR = 10;
+        ////nStepIR = 2;
+        m_iIR = CORONA_RAY_CNT2 - 1;
         nStepIR = 2;
     }
 

@@ -1,14 +1,6 @@
-﻿
-//* Copyright (c) 2025 Kazuo Kawamura
-//*
-//* This source code is distributed under the MIT License.
-//*
-//* Please see the LICENSE file for details.
-
-
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used in SRTLM.rc
+﻿//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ で生成されたインクルード ファイル。
+// SRTLM.rc で使用
 //
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
@@ -30,10 +22,7 @@
 #define IDC_EDIT_CYL                    1023
 #define IDC_CHECK_KEISYA                1024
 #define IDC_CHECK_REVERSE               1025
-#define IDC_STATIC_KIN_ATU              1026
-#define IDC_EDIT_CYL2                   1026
 #define IDC_EDIT_AX2                    1026
-#define IDC_STATIC_KIN_USU              1027
 #define IDC_EDIT_CURVE                  1028
 #define IDC_EDIT_T                      1029
 #define IDC_EDIT_L_TILT_X               1031
@@ -59,14 +48,10 @@
 #define IDC_SPIN_TARGET_DPT             1058
 #define IDC_SPIN_L_TILT_Y               1059
 #define IDC_SPIN_L_TILT_X               1060
-#define IDC_EDIT1                       1061
 #define IDC_EDIT_R1                     1061
-#define IDC_EDIT2                       1062
 #define IDC_STATIC_R1                   1062
-#define IDC_EDIT3                       1063
 #define IDC_SLIDER_TARGET_DPT           1063
 #define IDC_BUTTON_TARGET_DPT_PLUS      1064
-#define IDC_BUTTON_FILE_IO              1065
 #define IDC_BUTTON_FILE_IN              1065
 #define IDC_BUTTON_FILE_OUT             1066
 #define IDC_SLIDER_LENS_ROTATE          1067
@@ -75,12 +60,13 @@
 #define IDC_SPIN_PG_ROTATE              1071
 #define IDC_BUTTON_RESET                1072
 #define IDC_CHECK_AF                    1073
+#define IDC_CHECK_FCCF                  1075
 
 // Next default values for new objects
-//
+// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        130
+#define _APS_NEXT_RESOURCE_VALUE        131
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1074
 #define _APS_NEXT_SYMED_VALUE           101

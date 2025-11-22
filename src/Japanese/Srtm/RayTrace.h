@@ -235,8 +235,8 @@ private:
     double m_dAX0, m_dAY0;            //* 主光線とν面との交点
 
     //* MakeCorona, PGCorona
-    double m_dStockAX[CORONA_NUM][CORONA_RAY_CNT];        //* スクリーン上の像のストック
-    double m_dStockAY[CORONA_NUM][CORONA_RAY_CNT];
+    double m_dStockAX[CORONA_NUM][CORONA_RAY_CNT2];        //* スクリーン上の像のストック
+    double m_dStockAY[CORONA_NUM][CORONA_RAY_CNT2];
 
 };
 

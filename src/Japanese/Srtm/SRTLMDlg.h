@@ -85,6 +85,10 @@ private:
     //* ------------------------------------------------
     BOOL GetPartsKY2(CString cStrkk_Parts);
 
+    //* m_iKY2 の数値文字列を抽出する子関数
+    //* ------------------------------------------------
+    BOOL GetParts1523(CString cStrkk_Parts);
+
     //* m_dC[n], m_dD[n]....などの数値文字列を抽出する子関数
     //* ------------------------------------------------
     BOOL GetParts(CString cStrkk_Parts);
@@ -224,13 +228,15 @@ private:
     bool m_bJujiRendou;
     bool m_bHantenFlg;
     bool m_bAFFlg;
+    bool m_bFccf1523Flg;    //* 20251027 (Ver.2.24.0) Add  Front Curve : Whether to fix to the refractive index of crown glass
 
-    /* 禁じ手 */
-    bool  m_bEditSphFlg     = false;
-    bool  m_bEditCylFlg     = false;
-    bool  m_bEditIndxFlg    = false;
-    bool  m_bEditCrvFlg     = false;
-    bool  m_bEditThcknssFlg = false;
+    //* 20251030 (Ver.2.26.0) Changed to Static Text
+    /////* 禁じ手 */
+    ////bool  m_bEditSphFlg     = false;
+    ////bool  m_bEditCylFlg     = false;
+    ////bool  m_bEditIndxFlg    = false;
+    ////bool  m_bEditCrvFlg     = false;
+    ////bool  m_bEditThcknssFlg = false;
 
     //* ピクチャーボックス
     //* ------------------------------------------------
@@ -434,6 +440,7 @@ protected:
     afx_msg void OnChangeEditAx2();     //* 20230610 Add
     afx_msg void OnKillfocusEditAx2();  //* 20230610 Add
     afx_msg void OnSetfocusEditAx2();   //* 20230610 Add
+    afx_msg void OnCheckFCCF();         //* 20251027 Add (Ver.2.24.0)
     afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
     //}}AFX_MSG
     DECLARE_MESSAGE_MAP()
@@ -442,6 +449,7 @@ public:
 protected:
     CButton m_Check_AF;
     CButton m_Check_Keisya;
+    CButton m_Check_Fccf1523; //* 20251027 (Ver.2.24.0) Add  Front Curve : Whether to fix to the refractive index of crown glass
 public:
 };
 

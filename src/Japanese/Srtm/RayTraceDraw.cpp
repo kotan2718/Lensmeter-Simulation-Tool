@@ -837,6 +837,7 @@ BOOL CRayTrace::PGCorona(long lCoronaCol)
 
     double dPx, dPy;
     int nIKK, nJKK, jjj;
+    nIKK = 0, nJKK = 0, jjj = 0;
     if (m_iCoronaFlg == 0) {
         for (nIKK = 0; nIKK <36; nIKK++) {
             for (nJKK = 0; nJKK < m_iIR + 1; nJKK++) {

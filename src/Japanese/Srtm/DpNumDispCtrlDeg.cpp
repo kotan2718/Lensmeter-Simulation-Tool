@@ -240,7 +240,7 @@ void CDpNumCtrl::DpKeyFetch1(UINT nChar)
                     break;
                 case FRAC_FIRST_FIELD_START:
                     if (GetKeyState(VK_SHIFT) < 0) {
-                        //* Shift + 矢印_UP : 1°でカウント
+                        //* Shift + 矢印_UP : 0.5°でカウント
                         if (m_iIntThird * 1000 + m_iIntSecond * 100 + m_iIntFirst * 10 + m_iFracFirst <= m_iMax) {
                             m_iFracFirst = m_iFracFirst + 5;
                         }

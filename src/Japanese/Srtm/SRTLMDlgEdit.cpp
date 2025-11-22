@@ -49,7 +49,7 @@ void CSRTLMDlg::OnButtonTargetDefault()
 {
     // TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
     //* Diopterダイヤル
-    if(m_dNowDefaultObjZ = -9999.0) {
+    if(m_dNowDefaultObjZ == -9999.0) {	//* 20251112 (Ver.2.26.1) bug fixed
         m_dObjZ = m_dDefaultObjZ;
     }
     else {
@@ -266,6 +266,7 @@ void CSRTLMDlg::OnButtonLRotate0()
     m_dCylTheta[5] = 0.0;
     m_dCylTheta[6] = 0.0;
     m_dAx_Hyouji = 0.0;
+    //m_dAx2 = 0.0;          //* 20251029 (Ver.2.26.0) Linked to [Lens Data] <- リンクさせない仕様に決定
 
     m_bSyokika = false;
     m_bSetSpinScrollFlg = true;
@@ -293,26 +294,27 @@ void CSRTLMDlg::OnChangeEditAx2()
     // OR 状態の ENM_CHANGE フラグをマスクに入れて呼び出す必要があります。
     // TODO: ここにコントロール通知ハンドラー コードを追加してください。
     if(m_bChangeEditFlg) {
-        if (m_bEditSphFlg == true) {
-            m_bEditSphFlg = false;
-            goto EXIT;
-        }
-        if (m_bEditCylFlg == true) {
-            m_bEditCylFlg = false;
-            goto EXIT;
-        }
-        if (m_bEditIndxFlg == true) {
-            m_bEditIndxFlg = false;
-            goto EXIT;
-        }
-        if (m_bEditThcknssFlg == true) {
-            m_bEditThcknssFlg = false;
-            goto EXIT;
-        }
-        if (m_bEditCrvFlg == true) {
-            m_bEditCrvFlg = false;
-            goto EXIT;
-        }
+        //* 20251030 (Ver.2.26.0) Changed to Static Text
+        ////if (m_bEditSphFlg == true) {
+        ////    m_bEditSphFlg = false;
+        ////    goto EXIT;
+        ////}
+        ////if (m_bEditCylFlg == true) {
+        ////    m_bEditCylFlg = false;
+        ////    goto EXIT;
+        ////}
+        ////if (m_bEditIndxFlg == true) {
+        ////    m_bEditIndxFlg = false;
+        ////    goto EXIT;
+        ////}
+        ////if (m_bEditThcknssFlg == true) {
+        ////    m_bEditThcknssFlg = false;
+        ////    goto EXIT;
+        ////}
+        ////if (m_bEditCrvFlg == true) {
+        ////    m_bEditCrvFlg = false;
+        ////    goto EXIT;
+        ////}
 
         UpdateData(TRUE);
 
@@ -380,7 +382,7 @@ void CSRTLMDlg::OnChangeEditSph()
 
         m_bChangeEditFlg = true;
 
-        m_bEditSphFlg = true;
+        ////m_bEditSphFlg = true;   //* 20251030 (Ver.2.26.0) Changed to Static Text
 
     }
 }
@@ -425,7 +427,7 @@ void CSRTLMDlg::OnChangeEditCyl()
 
         m_bChangeEditFlg = true;
 
-        m_bEditCylFlg = true;
+        ////m_bEditCylFlg = true;   //* 20251030 (Ver.2.26.0) Changed to Static Text
 
     }
 }
@@ -492,7 +494,7 @@ void CSRTLMDlg::OnChangeEditN()
 
         m_bChangeEditFlg = true;
 
-       m_bEditIndxFlg = true;
+        ////m_bEditIndxFlg = true;   //* 20251030 (Ver.2.26.0) Changed to Static Text
     }
 }
 
@@ -539,7 +541,7 @@ void CSRTLMDlg::OnChangeEditT()
 
         m_bChangeEditFlg = true;
 
-        m_bEditThcknssFlg = true;
+        ////m_bEditThcknssFlg = true;   //* 20251030 (Ver.2.26.0) Changed to Static Text
     }
 }
 
@@ -587,7 +589,7 @@ void CSRTLMDlg::OnChangeEditCurve()
 
         m_bChangeEditFlg = true;
 
-        m_bEditCrvFlg = true;
+        ////m_bEditCrvFlg = true;   //* 20251030 (Ver.2.26.0) Changed to Static Text
     }
 }
 
@@ -765,4 +767,17 @@ void CSRTLMDlg::OnResetCurrent()
     Invalidate(FALSE);
 }
 
+
+//* 20251027 Add (Ver.2.24.0) m_bFccf1523Flg
+//* Front Curve : Whether to fix to the refractive index of crown glass
+void CSRTLMDlg::OnCheckFCCF()
+{
+    // TODO: ここにコントロール通知ハンドラー コードを追加します。
+    if (m_bFccf1523Flg) {
+        m_bFccf1523Flg = false;
+    }
+    else {
+        m_bFccf1523Flg = true;
+    }
+}
 

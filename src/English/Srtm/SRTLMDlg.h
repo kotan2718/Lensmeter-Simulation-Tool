@@ -85,6 +85,10 @@ private:
     //* ------------------------------------------------
     BOOL GetPartsKY2(CString cStrkk_Parts);
 
+    //* m_iKY2 の数値文字列を抽出する子関数
+    //* ------------------------------------------------
+    BOOL GetParts1523(CString cStrkk_Parts);
+
     //* Sub function to extract numeric strings such as m_dC[n], m_dD[n]....
     //* ------------------------------------------------
     BOOL GetParts(CString cStrkk_Parts);
@@ -223,6 +227,7 @@ private:
     bool m_bJujiRendou;
     bool m_bHantenFlg;
     bool m_bAFFlg;
+    bool m_bFccf1523Flg;    //* 20251027 (Ver.2.24.0) Add  Front Curve : Whether to fix to the refractive index of crown glass
 
     /* Taboo move */
     bool  m_bEditSphFlg     = false;
@@ -445,6 +450,8 @@ protected:
     CButton m_Check_AF;
     CButton m_Check_Keisya;
 public:
+    CButton m_Check_Fccf1523;
+    afx_msg void OnCheckFCCF();
 };
 
 //{{AFX_INSERT_LOCATION}}

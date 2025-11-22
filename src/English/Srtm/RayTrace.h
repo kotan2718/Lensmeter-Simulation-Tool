@@ -243,8 +243,8 @@ private:
     double m_dAX0, m_dAY0;            //* The intersection point of the principal ray and the ν surface
 
     //* MakeCorona, PGCorona
-    double m_dStockAX[CORONA_NUM][CORONA_RAY_CNT];        //* Stock of images on the screen
-    double m_dStockAY[CORONA_NUM][CORONA_RAY_CNT];
+    double m_dStockAX[CORONA_NUM][CORONA_RAY_CNT2];        //* Stock of images on the screen
+    double m_dStockAY[CORONA_NUM][CORONA_RAY_CNT2];
 
 };
 

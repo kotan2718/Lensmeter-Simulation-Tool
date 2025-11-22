@@ -80,7 +80,8 @@ BOOL CDpNumCtrl::DpSetData0(double dValue1, double dValue2, int type)
         if (m_dNumValue < -double(m_iIntMaxMinus))
             m_dNumValue = -double(m_iIntMaxMinus);
     }
-    double dDmy = fabs(m_dNumValue);
+    ////double dDmy = fabs(m_dNumValue);
+    double dDmy = fabs(m_dNumValue) + KK_CEIL; //* 20251112 (Ver.2.26.0) Fixed a bug where numerical data such as 1.54999... was not rounded at the specified decimal places.
     m_iIntSecond = int(floor(dDmy / 10.0));
     m_iIntFirst = int(floor(dDmy - m_iIntSecond * 10.0));
     dDmy = (dDmy - floor(dDmy)) * 100.0;

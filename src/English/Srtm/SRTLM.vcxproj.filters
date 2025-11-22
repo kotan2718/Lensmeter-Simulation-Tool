@@ -146,9 +146,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="SRTLM.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>

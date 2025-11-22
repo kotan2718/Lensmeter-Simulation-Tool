@@ -528,8 +528,8 @@ BOOL CRayTrace::GLSSUB(int iNyu, int nJKK, long lCol)
             //* Calculate at Ax 180, then rotate to the specified angle at the end and output.
             //* This is a strange way of calculating.
             double dCOSST, dSINST;
-            dCOSST = 1.0; // m_dCylCos(iNyu)
-            dSINST = 0.0; // m_dCylSin(iNyu)
+            dCOSST = 1.0; //* m_dCylCos(iNyu)
+            dSINST = 0.0; //* m_dCylSin(iNyu)
 
             double dVALCY, dVALCX, dVALCYX;
             dVALCY = m_dC[iNyu];
@@ -838,6 +838,7 @@ BOOL CRayTrace::PGCorona(long lCoronaCol)
 
     double dPx, dPy;
     int nIKK, nJKK, jjj;
+    nIKK = 0, nJKK = 0, jjj = 0;
     if (m_iCoronaFlg == 0) {
         for (nIKK = 0; nIKK <36; nIKK++) {
             for (nJKK = 0; nJKK < m_iIR + 1; nJKK++) {

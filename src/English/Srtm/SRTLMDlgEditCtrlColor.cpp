@@ -32,29 +32,14 @@ HBRUSH CSRTLMDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
     {
     case CTLCOLOR_EDIT:
     case CTLCOLOR_MSGBOX:
+    case CTLCOLOR_STATIC:       //* 20251029 (Ver.2.25.0) Added background color settings to Static Edit
         switch (pWnd->GetDlgCtrlID())
         {
         case IDC_EDIT_SPH:
-            pDC->SetBkColor(m_IjiruyoiColor); // change the background color
-            // pDC->SetTextColor(m_textcolor); // change the text color
-            hbr = (HBRUSH) m_IjiruyoiBrush; //  apply the brush
-            break;
         case IDC_EDIT_CYL:
-            pDC->SetBkColor(m_IjiruyoiColor); // change the background color
-            hbr = (HBRUSH) m_IjiruyoiBrush; //  apply the brush
-            break;
         case IDC_EDIT_N:
-            pDC->SetBkColor(m_IjiruyoiColor); // change the background color
-            hbr = (HBRUSH) m_IjiruyoiBrush; //  apply the brush
-            break;
         case IDC_EDIT_T:
-            pDC->SetBkColor(m_IjiruyoiColor); // change the background color
-            hbr = (HBRUSH) m_IjiruyoiBrush; //  apply the brush
-            break;
         case IDC_EDIT_CURVE:
-            pDC->SetBkColor(m_IjiruyoiColor); // change the background color
-            hbr = (HBRUSH) m_IjiruyoiBrush; //  apply the brush
-            break;
         case IDC_EDIT_AX2:
             pDC->SetBkColor(m_IjiruyoiColor); // change the background color
             // pDC->SetTextColor(m_textcolor); // change the text color
@@ -62,32 +47,17 @@ HBRUSH CSRTLMDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
             break;
 
         case IDC_EDIT_TARGET_DPT:
+        case IDC_EDIT_LP_X:
+        case IDC_EDIT_LP_Y:
+        case IDC_EDIT_L_TILT_X:
+        case IDC_EDIT_L_TILT_Y:
+        case IDC_EDIT_PG_DEG:
+        case IDC_EDIT_AX:
+        case IDC_EDIT_R1:       //* 20251029 (Ver.2.25.0) Changed to Static Text
+        case IDC_EDIT_R2_MIN:   //* 20251029 (Ver.2.25.0) Changed to Static Text
+        case IDC_EDIT_R2_MAX:   //* 20251029 (Ver.2.25.0) Changed to Static Text
             pDC->SetBkColor(m_IjirunaColor); // change the background color
             // pDC->SetTextColor(m_textcolor); // change the text color
-            hbr = (HBRUSH) m_IjirunaBrush; //  apply the brush
-            break;
-        case IDC_EDIT_LP_X:
-            pDC->SetBkColor(m_IjirunaColor); // change the background color
-            hbr = (HBRUSH) m_IjirunaBrush; //  apply the brush
-            break;
-        case IDC_EDIT_LP_Y:
-            pDC->SetBkColor(m_IjirunaColor); // change the background color
-            hbr = (HBRUSH) m_IjirunaBrush; //  apply the brush
-            break;
-        case IDC_EDIT_L_TILT_X:
-            pDC->SetBkColor(m_IjirunaColor); // change the background color
-            hbr = (HBRUSH) m_IjirunaBrush; //  apply the brush
-            break;
-        case IDC_EDIT_L_TILT_Y:
-            pDC->SetBkColor(m_IjirunaColor); // change the background color
-            hbr = (HBRUSH) m_IjirunaBrush; //  apply the brush
-            break;
-        case IDC_EDIT_PG_DEG:
-            pDC->SetBkColor(m_IjirunaColor); // change the background color
-            hbr = (HBRUSH) m_IjirunaBrush; //  apply the brush
-            break;
-        case IDC_EDIT_AX:
-            pDC->SetBkColor(m_IjirunaColor); // change the background color
             hbr = (HBRUSH) m_IjirunaBrush; //  apply the brush
             break;
 

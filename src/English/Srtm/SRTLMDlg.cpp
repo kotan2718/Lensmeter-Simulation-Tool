@@ -123,7 +123,8 @@ CSRTLMDlg::CSRTLMDlg(CWnd* pParent /*=NULL*/)
     m_bKeisyaRendou = false;
     m_bJujiRendou = false;
     m_bHantenFlg = false;
-    m_bAFFlg = true;
+    m_bAFFlg = true;        
+    m_bFccf1523Flg = false; //* 20251027 (Ver.2.24.0)
 
     m_dDefaultObjZ = -9999.0;
     m_dNowDefaultObjZ = -9999.0;
@@ -209,6 +210,8 @@ void CSRTLMDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_CHECK_AF, m_Check_AF);
     DDX_Control(pDX, IDC_CHECK_KEISYA, m_Check_Keisya);
     DDX_Control(pDX, IDC_EDIT_AX2, m_DpStrAx2);         //* 20230610 Add  Lens Data : Ax
+    DDX_Control(pDX, IDC_CHECK_FCCF, m_Check_Fccf1523); //* 20251027 (Ver.2.24.0)7 Add  Front Curve : Whether to fix to the refractive index of crown glass
+    DDX_Control(pDX, IDC_CHECK_FCCF, m_Check_Fccf1523);
 }
 
 BEGIN_MESSAGE_MAP(CSRTLMDlg, CDialog)
@@ -262,9 +265,11 @@ BEGIN_MESSAGE_MAP(CSRTLMDlg, CDialog)
     ON_EN_CHANGE(IDC_EDIT_AX2, &CSRTLMDlg::OnChangeEditAx2)         //* 20230610 Add  Lens Data : Ax
     ON_EN_KILLFOCUS(IDC_EDIT_AX2, &CSRTLMDlg::OnKillfocusEditAx2)   //* 20230610 Add  Lens Data : Ax
     ON_EN_SETFOCUS(IDC_EDIT_AX2, &CSRTLMDlg::OnSetfocusEditAx2)     //* 20230610 Add  Lens Data : Ax
+    ON_BN_CLICKED(IDC_CHECK_FCCF, OnCheckFCCF)                      //* 20251027 Add (Ver.2.24.0)
     //}}AFX_MSG_MAP
     ON_WM_DESTROY()
-    END_MESSAGE_MAP()
+    ON_BN_CLICKED(IDC_CHECK_FCCF, &CSRTLMDlg::OnCheckFCCF)
+END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CSRTLMDlg message handlers
@@ -582,14 +587,19 @@ BOOL CSRTLMDlg::MainProgram()
     //
     /////////////////////////////
 
-    //* Drawing the Corona Image: Review required between x1, x2 and x10
+    //* 20251025 (Ver.2.23.0) x10 : Increase the number of rays to trace
+    //* Drawing of Corona Image...x1, x2, x10
     int nStepIR;
-    if (m_iCoronaFlg == 0) {
-        m_iIR = 5;
+    if (m_iCoronaFlg == 0) {                //* x1, x2
+        ////m_iIR = 5;
+        ////nStepIR = 1;
+        m_iIR = (CORONA_RAY_CNT - 1) / 2;
         nStepIR = 1;
     }
-    else {
-        m_iIR = 10;
+    else {                                  //* x10
+        ////m_iIR = 10;
+        ////nStepIR = 2;
+        m_iIR = CORONA_RAY_CNT2 - 1;
         nStepIR = 2;
     }
 

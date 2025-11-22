@@ -1,0 +1,565 @@
+
+//----------------------------------------
+SRTLM Revision History (Part 1: 2002–2007)
+//----------------------------------------
+
+version: 0.x.x -> 1.0.0
+
+v1.0.0-1
+    Ported from Visual Basic Version 6.0 Service Pack 4.
+
+v1.0.2
+    Added placement of scroll bars.
+
+v1.0.3
+    Added spin buttons.
+
+v1.0.4
+    Improved drawing process.
+    In corona image rendering, previously the function P_Pset() was called for every single point,
+    repeatedly constructing and destroying the drawing window.
+    Modified it so that all points are drawn within a single constructed window,
+    and the window is closed only after drawing is complete.
+
+    CWnd* kkoPict = GetDlgItem(IDC_PICT);
+    CClientDC pDC(kkoPict);
+
+    CRect kkoRect;
+    kkoPict->GetClientRect(kkoRect);
+
+    CRgn kkoRgn;
+    kkoRgn.CreateRectRgnIndirect(kkoRect);
+    pDC.SelectObject(kkoRgn);
+
+    .....corona image drawing process.....
+
+    kkoRgn.DeleteObject();
+
+v1.0.5
+    Fixed memory leak in GLS1().
+
+v1.0.6 2002/04/30
+    Conditional handling when setting ScrollPosition for scroll bars and spin buttons from MainProgram().
+    When the user is operating the scroll bar or spin button, ScrollPosition is finalized before MainProgram() is called,
+    so the assignment of ScrollPosition from MainProgram() is canceled.
+    Now MainProgram() sets ScrollPosition only when a value is directly entered in the edit box
+    or during initialization.
+
+v1.0.7  2002/05/01
+    Modified P_Char_Set() and P_Char_Set2() to allow specifying the font and its size when called.
+
+v1.0.8  2002/05/02
+    Defined "Initialize Current Data" (OnResetCurrent()).
+
+v1.0.9  2002/05/03
+    Why does drawing lines using trigonometric functions cause misalignment?
+    Trial and error.
+
+v1.0.10 2002/05/04
+    Created YuukouNum().
+    Handles significant digits when calculated values are close to zero.
+    For example, when deg = 180.0 in sin(KK_PI / 180.0 * deg),
+    residuals remain in the 10th decimal place and beyond.
+    This function eliminates such rounding errors when converting values to integers for drawing.
+
+v1.1.1  2002/05/04
+    Accelerated lens drawing.
+    Similar to corona image rendering, stopped the repeated construction and destruction of the drawing window.
+    Now the window is built in KyokumenSelect(),
+    the device context is passed to the sub-function GLSSUB().
+    And all lines are drawn within the single constructed window before closing it.
+
+v1.1.2  2002/05/04
+    Accelerated tracing ray drawing.
+
+v1.1.3  2002/05/04
+    Introduced sliders.
+
+v1.1.4  2002/05/05
+    Target: synchronization between sliders and spin buttons.
+
+v1.1.5  2002/05/06
+    Started building data file input/output routines.
+
+v1.1.6  2002/05/07
+    Created data file input routine.
+
+v1.1.7  2002/05/09
+    Created data file output routine.
+
+v1.1.8  2002/05/11
+    Debugged data file I/O routines.
+
+v1.2.0  2002/05/25
+    Added class DpNumDispCtrl (renamed from Mr. Irie's DpLatLon) for input control.
+
+v1.3.0  2002/05/30
+    Added class ScrnCtrl (renamed from Mr. Irie's ProjectXctrlScrn)
+    to perform runtime initialization and immediate drawing at startup.
+
+v1.3.2  2002/06/01
+    Changed variable names — tried to avoid using underscores ("_") where possible.
+
+v1.3.4  2002/06/01
+    Input control: attempted to handle multiple formats in a single class, but failed.
+
+v1.3.8  2002/06/04
+    World Cup: Japan's first match vs. Belgium — Go Japan!
+    Input control => format-specific classes => [+/-]00.00
+    This is elegant.
+
+v1.3.9  2002/06/04
+    Changed dialog layout.
+
+v1.4.0  2002/06/04
+    Input control => format-specific class => 179.9 => 180.0 => 000.1 => 179.9 (endless loop).
+    Temporarily removing 180.0 to avoid looping.
+
+v1.4.1  2002/06/05
+    Input control => format-specific class => endless loop completed successfully.
+
+v1.4.2,3,3a  2002/06/09
+    Input control => format-specific classes => [+/-]00.0, [+/-]00.00
+    Fixed several issues in DpNumDispCtrl.
+    When max/min ends with zero (e.g., 20 instead of 24), rounding at ones or tenths place failed.
+    Corrected and made the functions more systematic.
+
+v1.4.3b 2002/06/10
+    Checking the effective lens diameter will be postponed for now.
+    Here, I checked and corrected the file loading process when multiple lenses are present.
+    It's a bit clunky, but I used a switch( m_iKY2 ) inside DLS2()
+    to accurately handle the drawing lenses according to m_iKY2 = 12, 14, 16.
+
+v1.4.3c 2002/06/10
+    Attempted unifying input control classes — difficult...
+
+v1.4.3d 2002/06/11
+    Unified input control classes — difficult, but done. (^_^)v
+
+v1.4.4  2003/04/25
+    Fixed a bug where pressing horizontal movement keys caused lens to move vertically when 'JujiRendou = true.'
+
+v1.5.0  2003/04/25
+    Now MainProgram() is automatically called when editing the lens data EditBox.
+
+v1.5.0b 2003/04/25
+    Issues:
+    Clicking beside the slider knob reset related edit boxes to default.
+    Also, slider position for the focusing glass reset to the left end during initialization.
+
+v1.5.0c 2003/04/26
+    Addressed the issue where clicking beside the slider knob reset related edit boxes.
+
+    Completed background color customization for edit boxes.
+
+v1.5.0d 2003/06/06
+    Fixed data input when two or more test lenses are used.
+
+v1.5.0e 2003/10/06
+    Fixed initial slider position for lens rotation when lens data Ax = 0.0.
+    Adjusted tab order to prevent focus from moving to non-editable boxes,
+    while allowing focus on editable lens data fields.
+    When the tab order moves to the lens thickness and refractive index fields, the nonexistent "sign" field was highlighted.    Also fixed inability to move focus using arrow keys within numeric fields.
+    (Still needs to ensure focus initially moves to the first numeric field — to be checked later.)
+
+v1.6.0  2003/10/27
+    Changed tracing reference surface: previously the first surface, now the front surface of the first lens.
+
+    This brings the code into formal compliance with "Lens Engineering" and reduces one instance of unnecessary calculations.
+    It was tough work. (^_^;
+
+v1.6.1  2007/12/17
+    Fixed DataOut error when test lens has only one lens (11-surface configuration).
+
+
+
+//----------------------------------------
+SRTLM Revision History (Part 2: 2017–2023)
+//----------------------------------------
+
+2017/05/08
+Version: 1.x.x => 2.0.0
+
+v2.0.0  2017/05/08
+    Eliminated flickering during redraws of picturebox1 and picturebox2 by implementing double buffering.
+    For information on double buffering, I referred to the following site
+    by Mr. Kohei Tokoi of the Faculty of Systems Engineering, Wakayama University.
+    Mr. Kohei Tokoi, I would like to express my sincere gratitude.
+
+    "An OpenGL 'lazy' Introduction Using GLUT":
+        https://tokoik.github.io/opengl/libglut-sav.html
+    "Dialog-Based OpenGL Applications Using MFC" (Japanese PDF only):
+        https://marina.sys.wakayama-u.ac.jp/~tokoi/mfc/MFC-OpenGL-Dialog.pdf
+
+v2.1.0  2023/04/12
+    Issue: Sometimes the diopter-converted target position value was off by 0.02D.
+    Cause: Problem in SRTMDlgAction.cpp => function Diopter() (rounding method expanded error).
+    Fix:   Adjusted m_dDpt (diopter-converted target position) to round the 3rd decimal place to either 0 or 5.
+
+    Examples:
+    +5.79 => +5.80        -4.73 => -4.75        -0.21 => -0.20
+
+v2.2.0  2023/04/17
+
+    Issue: When modifying the center thickness in the "Lens Data" group,
+           the collimator system shifted from the rear surface instead of the front surface of the test lens.
+    Cause: In RayTraceDraw.cpp, the stored inter-surface distance was being applied from the rear surface.
+           However, in RayTrace(), the rear surface was fixed — processing was normal.
+    Fix:   Modified behavior so that the distance between the collimator system and the rear lens surface remains fixed,
+           and thickness changes are now reflected on the front surface of the test lens.
+
+v2.3.0  2023/04/21–22
+
+    Issue: Pressing the Enter key during lens data setup reset values to default.
+    Cause: Pressing Enter triggered OnStart(), reloading initial defaults.
+    Fix:   - Commented out ON_BN_CLICKED(ID_START, OnStart) in MESSAGE_MAP.
+           - Removed the default "Initialize" (OK) button and replaced it with a new button IDC_RESET_DEFAULT linked to OnStart().
+           - However, pressing Enter now terminated the program.
+           - Restored the original OK button but set it to hidden and disabled to suppress Enter key activation.
+
+v2.4.0  2023/04/26
+    Issue: When the slider control had focus, pressing arrow keys reset it to the initial value —
+           the slider moved, but the drawing did not update.
+    Cause: In SRTMDlgScroll.cpp, arrow keys set nPos = 0,
+           and without handling, this triggered a reset.
+    Fix:   Assigned the same processing used for clicking beside the slider knob
+           to arrow key input, ensuring consistent updates.
+
+v2.4.1  2023/04/29
+    Rearranged the dialog layout to regroup related components.
+
+v2.4.2  2023/04/29
+    Updated tab order accordingly.
+
+v2.4.3  2023/04/30
+    Attempted to disable editing for specific edit controls that should not be touched,
+    but couldn't implement it successfully.
+    For the time being, we will address this by indicating in the instruction manual
+    that the value in "this edit box" should not be changed.
+
+v2.5.0  2023/05/09
+    Issue: -When defining a lens with a flat front surface and back convex surface,
+            and attempting to move the lens up, down, left, or right with the “Slope-Linked” option checked,
+            the collimator system is rendered up to the front half,
+            after which neither the rays nor the lens are rendered.
+           -When both front and back surfaces are set convex and the above operation is performed,
+            both the lens and light rays are rendered, but the tilt becomes reversed relative to the optical axis.
+            In other words, the tilt becomes identical to that of a standard eyeglass lens with a right-convex back surface.
+    Cause: BOOL CSRTLMDlg::SRTLM_Keisya_Rendou() didn't account for left-convex lenses.
+    Fix:   Added conditions for left-convex cases — now behaves correctly.
+
+v2.6.0  2023/05/13
+    Enhancement:
+    In "Lens Data," wanted to increment/decrement spherical and cylindrical powers
+    in 0.25D steps (i.e., 00, 25, 50, 75).
+
+    First, separated the lens curvature component from refractive power,
+    as curvature must vary continuously up to two decimal places.
+
+    Added module: DpNumDispCurve.cpp.
+
+    (Note: Until 4/21, each arrow key press changed the target position's refractive power,
+    but this didn't work — verification showed it was broken even in 2017 data.
+    Currently, the "Lens Data" group must lose focus before updates apply.
+    Seems deeply rooted — to be investigated later.)
+
+
+v2.7.0  2023/05/18
+    Feature:
+    Completed 0.25D increment/decrement for spherical and cylindrical powers.
+    Modified module: DpNumDispCtrl.cpp
+
+    [1] Supports ±0.25D steps with VK_UP/VK_DOWN, including sign reversal (+ ⇔ -).
+    [2] Verified that directly entering numeric values also updates the target position
+        (with minor rounding differences requiring further validation).
+        Afterward, arrow key changes propagate smoothly.
+
+v2.8.0  2023/05/20
+    Issue:
+        Previously, changing spherical or cylindrical powers in "Lens Data"
+        updated the "Target Position" in real time.
+        After 4/21, updates applied only after pressing Tab multiple times
+        until focus reached the Target Position slider.
+
+    Cause & Investigation:
+        Suspected DP-related issue, but debugging didn't reproduce it —
+        in debug mode, updates worked fine.
+        After reverting to the 2017 SRTM.rc file,
+        tracked the issue and found it originated in the tab order.
+
+        See screenshots in tab_order.xlsx for good/bad examples.
+        It appears implicit grouping in tab order may block event signaling
+        when set incorrectly.
+
+        Regardless of cause (DP or VC++ quirk),
+        confirmed that arrow key adjustments for spherical/cylindrical powers
+        now reflect in real time.
+
+v2.9.0  2023/05/20
+    Rearranged dialog layout again, grouping edit controls under:
+    - Lens Setting
+    - Operation
+    - Lens Data
+
+v2.10.0 2023/05/21
+    Issue:
+    After modifying "Lens Data," pressing "Initialize" followed by "Initialize with Current Data"
+    failed to reset to the default target position — it stayed at the modified position.
+    Cause:
+        BOOL CSRTLMDlg::OnResetCurrent() retained m_dNowDefaultObjZ
+        as the modified Lens Data value.
+    Fix:
+        In BOOL CSRTLMDlg::DataInitialize(), added:
+        m_dNowDefaultObjZ = m_dObjPoint1;
+        => stores the default target position during initialization.
+
+v2.10.1 2023/05/21–
+    From now on, SRTLM will incorporate educational functions
+    so it can be used for lens measurement and training purposes.
+
+    Goals:
+
+    [1] Set up lenses exactly as displayed in "Lens Data."
+        Specification:
+        Allow tolerance via random variation:
+            Power: (negative side) ±1D
+            Axis: ±15°
+
+        Example:
+            Lens Data: S–1.00    C–1.50    Ax 175
+            Power: –2.50 ±1.00 => –1.50 to –3.50
+            Axis:    175 ±15° => 190(10) to 160 (periodic at 180°)
+
+    [2] Measurement of existing eyeglasses
+        => (2023/05/28) To be defined later.
+
+v2.10.2 2023/05/25
+    Critical Note:
+    Most function calls manipulate member variables directly without using arguments.
+    (It's impressive it worked this far like that...)
+    [1] Do we actually need return values?
+    [2] If multiple results are needed, pass by reference instead.
+
+    Once AF stabilizes, review each function one by one.
+
+v2.10.3 2023/05/27
+    After reviewing the 2023/05/25 note,
+    perhaps I overstated things.
+    Since this tool recalculates in response to events,
+    key variables (m_dDpt, m_dObjZ, etc.) do need to be members.
+    However, individual functions should be revised to take necessary data via arguments
+    and return computed results appropriately.
+
+    Started refactoring with the Diopter() and Target() functions.
+    Will continue reviewing others.
+
+    Comment:
+    Maybe it's best not to touch it after all.
+    It's already highly tuned.
+
+v2.11.0 2023/05/29
+    In the 2023/05/21 entry, I mentioned using random numbers — but the randomness was poor.
+    Perhaps the way I used it was wrong, but the values kept repeating the same pattern every time.
+
+    Excel's random function has its critics, but since it uses time as a seed,
+    it produces reasonably varied results.
+    In contrast, C++'s rand() is simply terrible.
+
+    During my research, I found some interesting articles:
+        http://vivi.dyndns.org/tech/cpp/random.html
+        https://cpprefjp.github.io/reference/random.html
+    They describe how to use the C++ random number library.
+
+    Therefore, I decided to implement a class that uses this library
+    to generate random values in a more realistic way.
+
+v2.11.1 2023/06/01
+    Implemented lens setup under AF_OFF mode using the random number library.
+
+    Random variation specifications:
+        Focus alignment: ±1D
+        Lens position (x): ±5 mm
+        Lens position (y): ±5 mm
+        Lens rotation: ±15°
+
+v2.12.0 2023/06/10
+    Added "Ax" field to Lens Data.
+
+    Originally, the "Lens Rotation" text box and slider were placed in this position,
+    but since they are unrelated to the actual lens data,
+    they were moved to the "Lens Settings" section when reorganizing the dialog layout.
+    Realizing that no field defined Ax within "Lens Data,"
+    I added a dedicated Ax entry there.
+
+    The relationship between Lens Data (Ax) and Lens Settings (Lens Rotation) is as follows:
+
+    Operation	                                Lens Data     Lens Settings
+        Initial state	                        180          180
+        Data In                                 m_dCyl[5]    m_dCyl[5]
+                                                changed      follows "Lens Data"
+        Modified                                changed      follows "Lens Data"
+        Reset   Initialize                      180          180
+                Initialize with Current Data    changed      follows "Lens Data"
+
+
+v2.13.0 2023/06/25
+    [1] Lens Data: Added Ax
+    - Changing S and C values in "Lens Data" no longer automatically updated the target position's refractive power display.
+        Implemented a rather forceful fix.
+        It's unclear whether this is due to event timing or a misunderstanding of the process,
+        but modifying S or C somehow triggers OnChangeEditAx2().
+        When Invalidate(FALSE); executes, the target position's power display stops updating.
+        To address this, added a bypass for Invalidate().
+
+v2.14.0 2023/06/25
+    - Changing Ax in "Lens Data" did not update the Ax value in "Lens Rotation."
+        Nothing seemed to work (see "Srtm_20230625a_禁じ手その2はダメ").
+        As a workaround, once editing is complete, focus now automatically shifts
+        to the Lens Rotation slider control, forcing synchronization indirectly.
+
+v2.15.0 2023/06/25
+    [2] When [AF] is OFF and the "Initialize" button is pressed,
+       clicking the spin button for lens movement caused unexpected numeric jumps,
+       and the lens physically moved accordingly.
+
+    Cause:
+        At initialization (SRTLMDlgScroll.cpp),
+            m_dTLX[5] = m_dTLX[5] + double(iPosition - m_iLensPosXOld) / 10.0;
+            m_dTLY[5] = m_dTLY[5] + double(iPosition - m_iLensPosYOld) / 10.0;
+        Here, iPosition stores the numeric value shown in the text box,
+        while m_iLensPosXOld was 0,
+        so the system moved by the full amount of iPosition.
+    Fix:
+        Added the following to SRTLMDlgSub.cpp => DataIn():
+            m_iLensPosXOld = (int)m_dTLX[5] * 10;
+            m_iLensPosYOld = (int)m_dTLY[5] * 10;
+
+v2.16.0 2023/06/27
+    Enhancement:
+        Enabled fine control for S and C (spherical and cylindrical powers) using arrow-key + modifier combinations:
+
+        - 0.25D steps: Up / Down arrow keys
+        - 0.05D steps: Shift + Up / Down
+        - 0.01D steps: Shift + Ctrl + Up / Down
+
+v2.17.0 2023/07/08
+    Changed the default save directory for lens data.
+    Now, saved under the [dat] folder located one level above the executable.
+
+v2.18.0 2023/07/08
+    Added the ability to specify lens data file at startup.
+    If no file is provided, the built-in default data is used.
+
+
+v2.19.0 2023/07/09
+    Modified DataIn so that the crosshair on the focusing glass follows Ax automatically.
+
+    => Big mistake!
+    Lens rotation and crosshair rotation are completely separate functions
+    (just as in actual lens meters).
+    This change was incorrect and has been reverted.
+    That was close.
+
+v2.20.0 2023/07/10
+    Modified the dialog box title to automatically include the current year.
+
+v2.21.0 2023/07/10
+    Fixed the "About" box to display static text only.
+    Including version numbers there required frequent manual updates,
+    so now it's simplified as follows:
+
+    About SRTLM
+    Lens Meter Simulation by Skew Ray Tracing
+    Copyright (C) Kazuo Kawamura - VFF06643@nifty.ne.jp
+
+    The "Details" section in the executable's properties window
+    (still managed manually) remains unchanged —
+    Yes, still a hassle.
+
+
+v2.22.0 2023/07/15
+    Added English version.
+
+
+
+//----------------------------------------
+SRTLM Revision History (Part 3: 2025–)
+//----------------------------------------
+
+v2.23.0 2025/10/25
+    The color of the corona image on the focusing glass appeared slightly too faint.
+    (Although this is actually the correct brightness,
+    the real focusing glass has a light-gray background, while this tool uses white — for various reasons.)
+    Therefore, the corona color was adjusted to be slightly darker.
+    Additionally, when magnified 10x,
+    the number of tracing rays was increased for a more detailed representation.
+
+v2.24.0 2025/10/27
+    Added a new feature allowing users to select between
+    the conventional curvature based on refractive index
+    and a curvature referenced to n = 1.523 (Crown Glass).
+
+    In optics, curvature refers to the front surface refractive power (D1′),
+    but in the eyeglass industry, "curve" typically refers to the refractive power
+    based on 1.523 as the reference index.
+
+    If curvature alone can uniquely represent lens surface shape,
+    it will help streamline communication between lens manufacturers and frame makers.
+
+    To implement this, a new checkbox labeled "□1.523" was added next to the "Curve" display box.
+
+    Behavior:
+
+    When the checkbox is checked => the front refractive power is calculated based on n = 1.523,
+        regardless of the actual lens refractive index.
+
+    When unchecked => the calculation follows the conventional method,
+        using the actual refractive index of the test lens.
+
+    Data file I/O was also updated to include this checkbox setting.
+    However, existing data files (without the new field) remain backward-compatible —
+    they are treated as "unchecked" by default.
+
+v2.25.0 2025/10/29
+    Added a new feature to update front and rear surface radii (r1, r2_min, r2_max)
+    in real time whenever "Lens Data" is modified. (Improvements to features postponed in v2.6.0)
+
+    Previously, these radius values were only refreshed after the "Lens Data" group lost focus.
+    Since the fields were originally implemented as read-only edit boxes,
+    they didn't automatically refresh.
+
+    By converting these controls from Edit Text to Static Text,
+    changes are now reflected immediately.
+
+v2.26.0 2025/10/29
+    Implemented synchronization between Ax in Lens Data
+    and Ax in the Lens Rotation section.
+
+    I've added a feature that automatically updates the "Ax" of the Lens Rotation Section
+    when you change the "Ax" of the [Lens Data] Group.
+    Previously, they weren't linked, but I felt it was more natural to link them, so I added the linking feature.
+
+    However, changing the "Ax" of the Lens Rotation Section does not change the "Ax" of the [Lens Data] Group.
+    This is by design.
+    Therefore, the link is one-way, from the [Lens Data] Group to the Lens Rotation Section.
+
+    Additionally, in all sections other than "Lens Data,"
+    read-only edit boxes were replaced with Static Text controls.
+
+    As a result, the following variables became unnecessary and were removed:
+
+    m_bEditSphFlg
+    m_bEditCylFlg
+    m_bEditIndxFlg
+    m_bEditCrvFlg
+    m_bEditThcknssFlg
+
+v2.27.0 2025/11/16
+    Spin control has been modified to immediately gain focus.
+
+    After setting data in the lens data group and pressing a button,
+    focus immediately shifts from the lens data group to the button.
+    However, pressing the spin control caused the lens data group to retain focus.
+    We fixed this so that pressing the spin control also kills focus from the lens data group,
+    just like pressing a button or slider, allowing the spin button to respond.
+

@@ -48,8 +48,8 @@ void CSRTLMDlg::OnKillfocusEditTargetDpt()
 void CSRTLMDlg::OnButtonTargetDefault()
 {
     // TODO: Please add the code for the control notification handler at this location.
-    //* Diopterダイヤル
-    if(m_dNowDefaultObjZ = -9999.0) {
+    //* Diopter Dial
+    if(m_dNowDefaultObjZ == -9999.0) {	//* 20251112 (Ver.2.26.1) bug fixed
         m_dObjZ = m_dDefaultObjZ;
     }
     else {
@@ -758,4 +758,15 @@ void CSRTLMDlg::OnResetCurrent()
     Invalidate(FALSE);
 }
 
-
+//* 20251027 Add (Ver.2.24.0) m_bFccf1523Flg
+//* Front Curve : Whether to fix to the refractive index of crown glass
+void CSRTLMDlg::OnCheckFCCF()
+{
+    // TODO: Please add the code for the control notification handler at this location.
+    if (m_bFccf1523Flg) {
+        m_bFccf1523Flg = false;
+    }
+    else {
+        m_bFccf1523Flg = true;
+    }
+}

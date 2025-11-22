@@ -191,7 +191,7 @@ void CDpNumCtrl::DpKeyFetch1(UINT nChar)
                     break;
                 case INT_FIRST_FIELD_START:
                     if (GetKeyState(VK_SHIFT) < 0) {
-                        //* Shift + Arrow_UP: Counts in 1°
+                        //* Shift + Arrow_UP: Counts at 1°
                         if (m_iIntThird * 1000 + m_iIntSecond * 100 + m_iIntFirst * 10 + m_iFracFirst <= m_iMax) {
                             m_iIntFirst++;
                         }
@@ -240,7 +240,7 @@ void CDpNumCtrl::DpKeyFetch1(UINT nChar)
                     break;
                 case FRAC_FIRST_FIELD_START:
                     if (GetKeyState(VK_SHIFT) < 0) {
-                        //* Shift + Arrow_UP: Counts in 1°
+                        //* Shift + Arrow_UP: Counts at 0.5°
                         if (m_iIntThird * 1000 + m_iIntSecond * 100 + m_iIntFirst * 10 + m_iFracFirst <= m_iMax) {
                             m_iFracFirst = m_iFracFirst + 5;
                         }
@@ -313,7 +313,7 @@ void CDpNumCtrl::DpKeyFetch1(UINT nChar)
                     break;
                 case INT_FIRST_FIELD_START:
                     if (GetKeyState(VK_SHIFT) < 0) {
-                        //* Shift + Arrow_DOWN: Counts in 1°
+                        //* Shift + Arrow_DOWN: Counts at 1°
                         if (m_iIntThird * 1000 + m_iIntSecond * 100 + m_iIntFirst * 10 + m_iFracFirst >= 0) {
                             m_iIntFirst--;
                         }
@@ -359,7 +359,7 @@ void CDpNumCtrl::DpKeyFetch1(UINT nChar)
                     break;
                 case FRAC_FIRST_FIELD_START:
                     if (GetKeyState(VK_SHIFT) < 0) {
-                        //* Shift + Arrow_DOWN: Counts in 0.5°
+                        //* Shift + Arrow_DOWN: Counts at 0.5°
                         if (m_iIntThird * 1000 + m_iIntSecond * 100 + m_iIntFirst * 10 + m_iFracFirst >= 0) {
                             m_iFracFirst = m_iFracFirst - 5;
                         }

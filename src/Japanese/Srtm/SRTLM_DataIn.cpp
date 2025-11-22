@@ -151,6 +151,12 @@ BOOL CSRTLMDlg::DatFileInPut(LPCTSTR strPath)
             GetPartsKY2(strBuff);
             continue;
         }
+        //* 20251027 (Ver.2.24.0) m_bFccf1523Flg
+        //* Front Curve : Whether to fix to the refractive index of crown glass
+        if (strBuff.Find(_T("m_Check_Fccf1523")) >= 0) {
+            GetParts1523(strBuff);
+            continue;
+        }
         if (strBuff.Find(_T("m_dC[")) >= 0) {
             GetParts(strBuff);
             continue;
@@ -202,11 +208,11 @@ BOOL CSRTLMDlg::GetPartsKY2(CString cStrkk_Parts)
     pdest = (_TCHAR*)_tcschr(strParts, ch);
     result = pdest - strParts + 1;
 
-    if(pdest != NULL)     {
+    if (pdest != NULL) {
         iLenParts = iLenParts - result;
         strParts = strParts.Right(iLenParts);
     }
-    
+
     //* 数値の右に ";" 或いは "//" でコメントがあった場合にそれをカットする
     int  ch2 = ';';
     _TCHAR *pdest2;
@@ -214,18 +220,18 @@ BOOL CSRTLMDlg::GetPartsKY2(CString cStrkk_Parts)
     pdest2 = (_TCHAR*)_tcschr(strParts, ch2);
     result2 = pdest2 - strParts + 1;
 
-    if(pdest2 != NULL)     {
+    if (pdest2 != NULL) {
         iLenParts = iLenParts - result2;
         strParts = strParts.Left(iLenParts);
     }
-    
+
     int  ch3 = '/';
     _TCHAR *pdest3;
     int result3;
     pdest3 = (_TCHAR*)_tcschr(strParts, ch3);
     result3 = pdest3 - strParts + 1;
 
-    if(pdest3 != NULL)     {
+    if (pdest3 != NULL) {
         iLenParts = iLenParts - result3;
         strParts = strParts.Left(iLenParts);
     }
@@ -234,6 +240,61 @@ BOOL CSRTLMDlg::GetPartsKY2(CString cStrkk_Parts)
     return TRUE;
 }
 
+
+//* 20251027 (Ver.2.24.0) m_bFccf1523Flg
+//* Front Curve : Whether to fix to the refractive index of crown glass
+//* ---------------------------------------------------
+//* m_bFccf1523Flg の数値文字列を抽出する子関数
+BOOL CSRTLMDlg::GetParts1523(CString cStrkk_Parts)
+//* ---------------------------------------------------
+{
+    CString strParts;
+    strParts = cStrkk_Parts;
+
+    //* 数値の抜き取り
+    int iLenParts;
+    iLenParts = strParts.GetLength();
+    int iLenPartsAll = iLenParts;
+
+    int  ch = '=';
+    _TCHAR *pdest;
+    int result;
+
+    pdest = (_TCHAR*)_tcschr(strParts, ch);
+    result = pdest - strParts + 1;
+
+    if (pdest != NULL) {
+        iLenParts = iLenParts - result;
+        strParts = strParts.Right(iLenParts);
+    }
+
+    //* 数値の右に ";" 或いは "//" でコメントがあった場合にそれをカットする
+    int  ch2 = ';';
+    _TCHAR *pdest2;
+    int result2;
+    pdest2 = (_TCHAR*)_tcschr(strParts, ch2);
+    result2 = pdest2 - strParts + 1;
+
+    if (pdest2 != NULL) {
+        iLenParts = iLenParts - result2;
+        strParts = strParts.Left(iLenParts);
+    }
+
+    int  ch3 = '/';
+    _TCHAR *pdest3;
+    int result3;
+    pdest3 = (_TCHAR*)_tcschr(strParts, ch3);
+    result3 = pdest3 - strParts + 1;
+
+    if (pdest3 != NULL) {
+        iLenParts = iLenParts - result3;
+        strParts = strParts.Left(iLenParts);
+    }
+
+    m_bFccf1523Flg = _wtoi(strParts);
+
+    return TRUE;
+}
 
 //* ---------------------------------------------------
 //* 指定の数値文字列を抽出する子関数
@@ -530,7 +591,6 @@ BOOL CSRTLMDlg::DefaultDataIn()
     //* 見つかったら起動時のレンズデータとして処理する
     char dst[CHAR_LEN];
     ZeroMemory(&dst[0], CHAR_LEN);
-    //memset(dst, 0x20, CHAR_LEN);
     WideCharToMultiByte(CP_ACP, 0, &cdir[0], lstrlen(cdir), &dst[0], CHAR_LEN, NULL, NULL);
     delete[] cdir;
 

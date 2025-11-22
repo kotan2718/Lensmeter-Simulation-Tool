@@ -46,10 +46,14 @@ LPTSTR str_cvt(double sn, int cut);
 
 #define KK_PI    3.14159265358979 //* 3238462643383279
 
+//* 数値の切り上げ
+#define KK_CEIL  0.000000000000001 //* 20251112 (Ver.2.26.0) Fixed a bug where numerical data such as 1.54999... was not rounded at the specified decimal places.
+
 //* コロナの数
 #define CORONA_NUM        36
 //* 1個のコロナを描くのに必要な光線数
 #define CORONA_RAY_CNT    11
+#define CORONA_RAY_CNT2   37 //* 20251025 (Ver.2.23.0)
 
 //* レンズ構成の境界面の総数の上限
 #define KOUSEIMEN_MAX    15
