@@ -53,8 +53,10 @@
 
 ## 作者
 川村 一夫
-[Contrail (GitHub Pages)](https://kotan2718.github.io/Contrail/)
-[Lensmeter Simulation Tool (GitHub Pages)](https://kotan2718.github.io/Lensmeter-Simulation-Tool/)
+
+[Contrail](https://kotan2718.github.io/Contrail/)
+
+[Lensmeter Simulation Tool](https://github.com/kotan2718/Lensmeter-Simulation-Tool/)
 
 ---
 
